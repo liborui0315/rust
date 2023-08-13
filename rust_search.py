@@ -1,38 +1,30 @@
-import requests
+import os
 
-# The search repositories endpoint URL
-url = "https://api.github.com/search/repositories"
+# Define the root directory
+root_dir = "C:\\Users\\17434\\PycharmProjects\\pythonProject1\\20"
 
-# Your personal access token
-headers = {
-    "Authorization": "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",
-}
+# Open an output file
+output_file = open("project_output.txt", "w")
 
-# The search parameters: search for popular Rust projects, sorted by the number of stars
-params = {
-    "q": "language:rust",
-    "sort": "stars",
-    "order": "desc",
-    "per_page": 10,  # Number of results to retrieve
-}
+# Recursive function to get all .rs files from a project directory
+def get_rs_files(dir_path, project_name):
+    rs_files = []
+    for root, dirs, files in os.walk(dir_path):
+        for file in files:
+            if file.endswith('.rs'):
+                rs_files.append(os.path.join(root, file))
+    return rs_files
 
-# Send a GET request to the GitHub API
-response = requests.get(url, headers=headers, params=params)
+# Loop through each directory in the root directory
+for project in os.listdir(root_dir):
+    project_path = os.path.join(root_dir, project)
+    if os.path.isdir(project_path):
+        # Get all .rs files for the current project
+        rs_files = get_rs_files(project_path, project)
+        output_file.write(f"Project: {project}\n")
+        for rs_file in rs_files:
+            output_file.write(rs_file + "\n")
+        output_file.write("\n")
 
-# If the request was successful
-if response.status_code == 200:
-    # Parse the response as JSON
-    data = response.json()
-
-    # Print the number of results
-    print(f"Found {data['total_count']} repositories.")
-
-    # For each repository in the results
-    for repo in data["items"]:
-        # Print the repository name and number of stars
-        print(f"{repo['name']}: {repo['stargazers_count']} stars")
-
-else:
-    # If the request failed, print the status code
-    print(f"Request failed with status {response.status_code}")
-
+# Close the output file
+output_file.close()

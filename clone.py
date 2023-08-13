@@ -43,3 +43,4 @@ for repo in repos:
     Repo.clone_from(https_url, f'./{name}')
 
 print('Finished cloning repositories.')
+
