@@ -98,7 +98,7 @@ public class Main {
                 "/inlinepython_example.rs", "/intellijrust_test_allinone.rs",
                 "/issue_1985_raw_string.rs", "/leaf_vmessstream.rs", "/literal.rs",
                 "/rustls_quic.rs", "/ssrust_config.rs", "/ssrust_ssserver.rs",
-                "/v1_46_0_split_float_literal.rs", "/v1_46_0_split_float_literal.rs.tree",
+                "/v1_46_0_split_float_literal.rs",
                 "/v1_48_0_unsafe_mod.rs", "/v1_53_0_or_pattern.rs",
                 "/v1_53_0_unicode_identifier.rs", "/v1_56_0_open_range.rs"
         };
