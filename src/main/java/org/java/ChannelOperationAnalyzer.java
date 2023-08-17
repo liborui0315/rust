@@ -86,7 +86,8 @@ public class ChannelOperationAnalyzer {
         File directory = new File("C:\\Users\\17434\\Downloads\\antlr-4.13.0-complete\\META-INF\\maven\\org.antlr\\Test\\20_rust_library");
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("channel_operation_analysis.csv"))) {
-            writer.write("Filename, send, recv, try_recv, drop, Iteration over receiving\n");  // Write header
+            // Write header
+            writer.write("Filename, send, recv, try_recv, drop, Iteration over receiving\n");
             analyzeDirectory(directory, analyzer, writer);
         } catch (IOException e) {
             System.err.println("Error writing to CSV file: " + e.getMessage());
@@ -103,7 +104,8 @@ public class ChannelOperationAnalyzer {
         List<File> files = Arrays.asList(fileArray);
         for (File file : files) {
             if (file.isDirectory()) {
-                analyzeDirectory(file, analyzer, writer);  // Recursively analyze subdirectories
+                // Recursively analyze subdirectories
+                analyzeDirectory(file, analyzer, writer);
             } else if (file.getName().endsWith(".rs")) {
                 analyzer.resetCounters();
                 analyzer.analyzeFile(file.toPath());
